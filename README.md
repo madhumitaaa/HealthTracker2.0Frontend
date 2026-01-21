@@ -354,13 +354,3 @@ const { user, token, loading, login, logout, isAuthenticated } = useAuth();
 3. **Reusable Component**: Create in `src/components/common/`
 4. **Styling**: Add rules to appropriate CSS file in `src/styles/`
 5. **Protected Feature**: Wrap with `<PrivateRoute>`
-
-## 📖 Resources
-
-- [React Router Docs](https://reactrouter.com/)
-- [Axios Docs](https://axios-http.com/)
-- [Vite Docs](https://vitejs.dev/)
-
----
-
-**Built with ❤️ for interview success** 🚀
