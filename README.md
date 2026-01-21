@@ -5,7 +5,7 @@ https://github.com/user-attachments/assets/76c0ef98-9b74-4b0d-b58e-c4017984351c
 
 # HealthTrack Frontend
 
-A professional, production-ready health tracking dashboard built with React, Vite, and modern web technologies.
+A professional, health tracking dashboard built with React, Vite, and modern web technologies.
 
 ## 🎯 Product Overview
 
