@@ -5,7 +5,7 @@ https://github.com/user-attachments/assets/76c0ef98-9b74-4b0d-b58e-c4017984351c
 
 # HealthTrack Frontend
 
-A professional, production-ready health tracking dashboard built with React, Vite, and modern web technologies.
+A professional, health tracking dashboard built with React, Vite, and modern web technologies.
 
 ## 🎯 Product Overview
 
@@ -354,13 +354,3 @@ const { user, token, loading, login, logout, isAuthenticated } = useAuth();
 3. **Reusable Component**: Create in `src/components/common/`
 4. **Styling**: Add rules to appropriate CSS file in `src/styles/`
 5. **Protected Feature**: Wrap with `<PrivateRoute>`
-
-## 📖 Resources
-
-- [React Router Docs](https://reactrouter.com/)
-- [Axios Docs](https://axios-http.com/)
-- [Vite Docs](https://vitejs.dev/)
-
----
-
-**Built with ❤️ for interview success** 🚀
