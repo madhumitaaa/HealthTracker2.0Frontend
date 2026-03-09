@@ -113,38 +113,64 @@ export default function AIChat() {
     return getIntentResponse();
   };
 
-  const handleSendMessage = async (e) => {
-    e.preventDefault();
-    if (!input.trim()) return;
+const handleSendMessage = async (e) => {
+  e.preventDefault();
+  if (!input.trim()) return;
 
-    const userMessage = input.trim();
-    setInput('');
-    setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
-    setLoading(true);
-    setError('');
+  const userMessage = input.trim();
 
-    try {
-      const response = await aiAPI.chat(userMessage);
-      setMessages(prev => [...prev, { role: 'assistant', content: response.data.message }]);
-    } catch (err) {
-      // Demo mode fallback with intelligent responses
-      const errorMessage = err.response?.data?.message || err.message || 'Failed to get response';
-      
-      if (err.response?.status === 429) {
-        setError('Rate limit reached. Please try again later.');
-        setMessages(prev => prev.slice(0, -1));
-      } else if (err.message?.includes('ERR_NETWORK') || err.message?.includes('Failed to fetch') || err.code === 'ERR_NETWORK') {
-        // Backend not running, demo mode - provide intelligent response
-        const demoResponse = getAIResponse(userMessage);
-        setMessages(prev => [...prev, { role: 'assistant', content: demoResponse }]);
-      } else {
-        setError(errorMessage);
-        setMessages(prev => prev.slice(0, -1));
+  setInput("");
+  setMessages(prev => [...prev, { role: "user", content: userMessage }]);
+  setLoading(true);
+  setError("");
+
+  try {
+    const response = await aiAPI.chat(userMessage);
+
+    const aiReply =
+      response?.data?.message ||
+      response?.data?.reply ||
+      "⚠️ AI returned an empty response.";
+
+    setMessages(prev => [
+      ...prev,
+      {
+        role: "assistant",
+        content: aiReply
       }
-    } finally {
-      setLoading(false);
+    ]);
+
+  } catch (err) {
+    const errorMessage =
+      err.response?.data?.message ||
+      err.message ||
+      "Failed to get response";
+
+    if (err.response?.status === 429) {
+      setError("Rate limit reached. Please try again later.");
+      setMessages(prev => prev.slice(0, -1));
+    } 
+    else if (
+      err.message?.includes("ERR_NETWORK") ||
+      err.message?.includes("Failed to fetch") ||
+      err.code === "ERR_NETWORK"
+    ) {
+      // Demo mode fallback
+      const demoResponse = getAIResponse(userMessage);
+      setMessages(prev => [
+        ...prev,
+        { role: "assistant", content: demoResponse }
+      ]);
+    } 
+    else {
+      setError(errorMessage);
+      setMessages(prev => prev.slice(0, -1));
     }
-  };
+
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="page-container">

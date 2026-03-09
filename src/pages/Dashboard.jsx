@@ -1,7 +1,9 @@
+// src/pages/Dashboard.jsx
 import { useState, useEffect } from 'react';
 import { entriesAPI } from '../api/entries.api';
 import Loader from '../components/common/Loader';
 import ErrorBanner from '../components/common/ErrorBanner';
+
 
 export default function Dashboard() {
   const [summary, setSummary] = useState(null);
@@ -11,18 +13,10 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchSummary = async () => {
       try {
-        const response = await entriesAPI.getDashboardSummary();
-        setSummary(response.data);
+        const res = await entriesAPI.getDashboardSummary();
+        setSummary(res.data.data); // ✅ FIX
       } catch (err) {
-        // Demo mode: provide default values
-        setSummary({
-          calories: 2150,
-          sleepHours: 7.5,
-          steps: 8432,
-          heartRate: 72,
-          mood: 'Good',
-          waterIntake: 6
-        });
+        setError(err.response?.data?.message || 'Failed to fetch summary');
       } finally {
         setLoading(false);
       }
@@ -34,39 +28,57 @@ export default function Dashboard() {
   if (loading) return <Loader />;
 
   const stats = [
-    { label: 'Calories', value: summary?.calories || 0, unit: 'kcal', icon: '🍽️', color: '#ef4444' },
-    { label: 'Sleep', value: summary?.sleepHours || 0, unit: 'hrs', icon: '😴', color: '#8b5cf6' },
-    { label: 'Steps', value: summary?.steps || 0, unit: 'steps', icon: '👟', color: '#10b981' },
-    { label: 'Heart Rate', value: summary?.heartRate || 0, unit: 'bpm', icon: '❤️', color: '#ec4899' },
-    { label: 'Mood', value: summary?.mood || 'N/A', unit: '', icon: '😊', color: '#f59e0b' },
-    { label: 'Water', value: summary?.waterIntake || 0, unit: 'cups', icon: '💧', color: '#3b82f6' },
+    { label: 'Calories', value: summary?.calories || 0, unit: 'kcal', icon: '🍽️' },
+    { label: 'Sleep', value: summary?.sleep || 0, unit: 'hrs', icon: '😴' },
+    { label: 'Steps', value: summary?.steps || 0, unit: 'steps', icon: '👟' },
+    { label: 'Heart Rate', value: summary?.heartRate || 0, unit: 'bpm', icon: '❤️' },
+    { label: 'Mood', value: summary?.mood || 'neutral', unit: '', icon: '😊' },
+    { label: 'Water Intake', value: summary?.waterIntake || 0, unit: 'cups', icon: '💧' },
   ];
 
-  return (
-    <div className="page-container">
-      <div className="dashboard-header">
-        <h1>Today's Summary</h1>
-        <p className="page-subtitle">Your health overview for today</p>
-      </div>
+return (
+  <div className="dashboard-container">
+
+    {/* LEFT SIDE */}
+    <div className="report-content">
+
+      <h1 className="texttitle">Today's Summary</h1>
 
       <ErrorBanner message={error} onClose={() => setError('')} />
 
       <div className="stats-grid">
         {stats.map((stat, idx) => (
           <div key={idx} className="stat-card">
-            <div className="stat-card-icon">{stat.icon}</div>
+
+            <div className="stat-card-icon">
+  <span className="emoji">{stat.icon}</span>
+</div>
+
             <p className="stat-label">{stat.label}</p>
-            <p className="stat-value">{stat.value}</p>
-            {stat.unit && <p className="stat-unit">{stat.unit}</p>}
+
+            <h2 className="stat-value">{stat.value}</h2>
+
+            {stat.unit && <span className="stat-unit">{stat.unit}</span>}
+
           </div>
         ))}
       </div>
 
-      {!summary && (
-        <div className="empty-state">
-          <p>No data yet. Start by adding your first entry!</p>
-        </div>
-      )}
     </div>
-  );
+
+
+    {/* RIGHT SIDE IMAGE PANEL */}
+    <div className="dashboard-right">
+
+      <div className="health-quote">
+        <h2>"Small daily habits create lifelong health."</h2>
+        <p>Track your sleep, mood and wellness every day.</p>
+      </div>
+
+    </div>
+
+  </div>
+  
+);
+  
 }

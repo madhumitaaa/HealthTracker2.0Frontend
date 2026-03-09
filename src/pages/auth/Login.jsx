@@ -18,7 +18,6 @@ export default function Login() {
     setError('');
     setLoading(true);
 
-    // Demo mode: Accept any email/password
     if (!email || !password) {
       setError('Please fill in all fields');
       setLoading(false);
@@ -27,21 +26,30 @@ export default function Login() {
 
     try {
       const response = await authAPI.login({ email, password });
-      login(response.data.user, response.data.token);
+
+      // Backend returns: token, accessToken, refreshToken, userId
+      const { token, accessToken, refreshToken, userId } = response.data;
+
+      // Construct a user object for frontend context
+      const user = {
+        id: userId,
+        email,
+        name: email.split('@')[0] // simple placeholder name
+      };
+
+      login(user, token || accessToken); // pass token to context
       navigate('/dashboard');
     } catch (err) {
-      // Demo mode fallback - allow login for testing
-      const demoUser = {
-        id: '1',
-        email: email,
-        name: email.split('@')[0]
-      };
-      const demoToken = 'demo-token-' + Math.random().toString(36).substr(2, 9);
-      
       const errorMessage = err.response?.data?.message || err.message || 'Login failed. Please try again.';
-      
+
+      // Demo fallback if backend is unreachable
       if (err.message?.includes('ERR_NETWORK') || err.message?.includes('Failed to fetch') || err.code === 'ERR_NETWORK') {
-        // Backend not running, use demo mode
+        const demoUser = {
+          id: '1',
+          email,
+          name: email.split('@')[0]
+        };
+        const demoToken = 'demo-token-' + Math.random().toString(36).substring(2, 11);
         login(demoUser, demoToken);
         navigate('/dashboard');
       } else {
