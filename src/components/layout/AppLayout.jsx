@@ -1,11 +1,14 @@
-import Sidebar from './Sidebar';
+import Sidebar from "./Sidebar";
 
 export default function AppLayout({ children }) {
   return (
     <div className="app-container">
       <Sidebar />
+
       <main className="main-content">
-        {children}
+        <div className="page-container">
+          {children}
+        </div>
       </main>
     </div>
   );
