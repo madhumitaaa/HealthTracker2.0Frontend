@@ -1,24 +1,41 @@
 /* =========================
    WEEKLY REPORT PAGE STYLING
 ========================= */
+
+/* Force full dark page and fix global overrides */
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #0f172a !important; /* Dark page background */
+  color: #fff !important;               /* White default text */
+  font-family: 'Inter', 'Segoe UI', 'Helvetica', sans-serif;
+}
+
+/* PAGE CONTAINER */
 .page-container {
-  padding: 24px;
   min-height: 100vh;
-  background: #0f172a; /* dark background */
-  color: #fff;          /* pure white text */
-  font-family: 'Inter', 'Segoe UI', 'Helvetica', sans-serif; /* clean sans-serif */
+  width: 100%;
+  padding: 24px;
+  box-sizing: border-box;
+  background-color: #0f172a !important;
+  color: #fff !important;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .page-container h1 {
   font-size: 34px;
   font-weight: 600;
   margin-bottom: 8px;
-  color: #fff; /* white heading */
+  color: #fff; /* White heading */
 }
 
 .page-subtitle {
   font-size: 22px;
-  color: #cbd5e1; /* soft gray for subtitle */
+  color: #cbd5e1; /* Soft gray subtitle */
   margin-bottom: 24px;
 }
 
@@ -27,16 +44,19 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  width: 100%;
 }
 
+/* REPORT CARD */
 .report-content {
-  background: #1f2a20; /* dark olive green card */
+  background-color: #1f2a20 !important; /* Dark olive green */
+  color: #fff !important;
   padding: 20px;
   border-radius: 16px;
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
   line-height: 1.6;
-  white-space: pre-wrap; /* respect AI line breaks */
-  color: #fff !important; /* text white */
+  white-space: pre-wrap; /* Respect line breaks from AI */
+  width: 100%;
 }
 
 .report-text {
@@ -47,7 +67,7 @@
 .report-text h2, 
 .report-text h3, 
 .report-text h4 {
-  color: #f0fdf4; /* soft white for headings */
+  color: #f0fdf4; /* Slightly brighter white for headings */
   margin: 12px 0 6px;
 }
 
@@ -60,23 +80,55 @@
   margin-bottom: 6px;
 }
 
-/* BUTTONS */
+/* BUTTON STYLING */
 button, .btn {
   font-weight: 500;
   border-radius: 12px;
   padding: 10px 14px;
   font-size: 14px;
   font-family: 'Inter', 'Segoe UI', 'Helvetica', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
 
-/* EMPTY STATE */
+button:hover, .btn:hover {
+  opacity: 0.9;
+}
+
+/* EMPTY STATE CARD */
 .empty-state {
-  background: #111827;
+  background-color: #111827 !important; /* Darker gray */
   padding: 24px;
   border-radius: 16px;
   text-align: center;
-  color: #cbd5e1; /* soft gray */
+  color: #cbd5e1 !important; /* Soft gray text */
   font-size: 16px;
   font-family: 'Inter', 'Segoe UI', 'Helvetica', sans-serif;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+}
+
+/* FULL WIDTH BUTTONS */
+button.fullWidth, .btn.fullWidth {
+  width: 100%;
+  text-align: center;
+}
+
+/* LOADER & ERROR BANNER */
+.loader, .error-banner {
+  color: #fff;
+}
+
+/* MEDIA QUERIES (Optional responsiveness) */
+@media screen and (max-width: 768px) {
+  .page-container h1 {
+    font-size: 28px;
+  }
+
+  .page-subtitle {
+    font-size: 18px;
+  }
+
+  .report-text {
+    font-size: 14px;
+  }
 }
