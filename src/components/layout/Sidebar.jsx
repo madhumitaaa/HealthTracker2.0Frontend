@@ -1,8 +1,9 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import Button from "../common/Button";
+import "../../styles/Sidebar.css";
 
-export default function Sidebar() {
+export default function Sidebar({ isOpen, toggle }) {
   const navigate = useNavigate();
   const location = useLocation();
   const { logout, user } = useAuth();
@@ -13,45 +14,50 @@ export default function Sidebar() {
     { label: "History", path: "/history", icon: "📋" },
     { label: "Weekly Report", path: "/weekly-report", icon: "📈" },
     { label: "AI Chat", path: "/ai-chat", icon: "🤖" },
+    { label: "Daily Routine", path: "/daily-routine", icon: "🍽️" },
+    { label: "Night Review", path: "/night-review", icon: "🌙" },
   ];
 
   const handleLogout = () => {
     logout();
-    navigate("/login");
+    navigate("/login", { replace: true });
+  };
+
+  const isActiveRoute = (path) => location.pathname === path;
+
+  const handleNavigation = (path) => {
+    if (location.pathname !== path) navigate(path);
+    if (isOpen) toggle();
   };
 
   return (
-    <aside className="sidebar">
-      {/* Header */}
-      <div className="sidebar-header">
-        <h1>HealthTrack</h1>
-        <p className="user-email">{user?.email}</p>
-      </div>
+    <>
+      {isOpen && <div className="sidebar-overlay" onClick={toggle}></div>}
+      <aside className={`sidebar ${isOpen ? "open" : ""}`}>
+        <div className="sidebar-header">
+          <h1>HealthTrack</h1>
+          <p className="user-email">{user?.email}</p>
+        </div>
 
-      {/* Navigation */}
-      <nav className="sidebar-nav">
-        {menuItems.map((item) => {
-          const isActive = location.pathname === item.path;
-
-          return (
+        <nav className="sidebar-nav">
+          {menuItems.map((item) => (
             <button
               key={item.path}
-              onClick={() => navigate(item.path)}
-              className={`nav-item ${isActive ? "active" : ""}`}
+              onClick={() => handleNavigation(item.path)}
+              className={`nav-item ${isActiveRoute(item.path) ? "active" : ""}`}
             >
-              <span>{item.icon}</span>
+              <span className="icon">{item.icon}</span>
               <span>{item.label}</span>
             </button>
-          );
-        })}
-      </nav>
+          ))}
+        </nav>
 
-      {/* Footer */}
-      <div className="sidebar-footer">
-        <Button onClick={handleLogout} variant="danger" fullWidth>
-          🚪 Logout
-        </Button>
-      </div>
-    </aside>
+        <div className="sidebar-footer">
+          <Button onClick={handleLogout} variant="danger" fullWidth>
+            🚪 Logout
+          </Button>
+        </div>
+      </aside>
+    </>
   );
 }

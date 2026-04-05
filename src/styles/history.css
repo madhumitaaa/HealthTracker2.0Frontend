@@ -1,0 +1,124 @@
+/* =========================
+   HISTORY PAGE - DARK THEME
+========================= */
+.page-container {
+  padding: 24px;
+  background: #0f172a;
+  color: #fff;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+}
+
+.page-container h1 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.page-subtitle {
+  font-size: 16px;
+  color: #94a3b8;
+  margin-bottom: 24px;
+}
+
+/* EMPTY STATE */
+.empty-state {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 0 12px rgba(255,255,255,0.05);
+  color: #d1d5db;
+}
+
+/* ENTRIES LIST */
+.entries-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ENTRY ITEM */
+.entry-item {
+  background: #1e293b; /* dark card background */
+  border-radius: 16px;
+  box-shadow: 0 0 10px rgba(255,255,255,0.05);
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.entry-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 18px rgba(59,130,246,0.4);
+}
+
+/* ENTRY HEADER */
+.entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  cursor: pointer;
+  background: #111827; /* slightly darker header */
+  color: #f0fdf4; /* light text for readability */
+}
+
+/* DATE AND MOOD */
+.entry-date strong {
+  font-size: 16px;
+  color: #d9f99d; /* light green to stand out */
+}
+
+.entry-mood {
+  font-size: 14px;
+  color: #94a3b8;
+  margin-left: 12px;
+}
+
+/* QUICK STATS */
+.entry-quick-stats {
+  font-size: 14px;
+  color: #cbd5e1;
+}
+
+/* ENTRY DETAILS */
+.entry-details {
+  padding: 16px;
+  background: #111827;
+  border-top: 1px solid #2f4f2f; /* subtle separation */
+  color: #f0fdf4;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ENTRY ACTIONS */
+.entry-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+/* BUTTONS */
+button {
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button[variant='secondary'] {
+  background: #2563eb; /* blue edit button */
+  color: #fff;
+}
+
+button[variant='danger'] {
+  background: #f43f5e; /* red delete button */
+  color: #fff;
+}
+
+button:hover {
+  opacity: 0.9;
+}

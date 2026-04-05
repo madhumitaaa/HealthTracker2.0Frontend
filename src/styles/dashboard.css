@@ -1,0 +1,261 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap');
+/* =========================
+   DASHBOARD - PROFESSIONAL LIGHT BLUE THEME
+========================= */
+.dashboard-welcome {
+  font-size: 34px;
+  font-weight: 700;
+  text-align: center;
+  margin: 10px 0 10px 0;
+
+  color: #0f2c4d; /* matches your theme */
+  font-family: 'Playfair Display', serif;
+
+  letter-spacing: 1px;
+}
+.dashboard-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 24px;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  color: #0f2c4d; /* Dark text for readability */
+  background: #e6f0fa; /* Calming light blue background */
+}
+
+/* LEFT PANEL */
+.report-content {
+  flex: 1;
+  min-width: 250px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  min-height: 670px;
+  overflow-y: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* PAGE TITLE */
+.page-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #040405 !important;
+   text-shadow: none !important;
+  filter: none !important;
+  box-shadow: none !important;
+  font-family: 'Playfair Display', serif;
+}
+
+/* STATS GRID */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+/* STAT CARDS */
+.stat-card {
+  background: #d0e4f7; /* Light blue card */
+  padding: 12px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+   border: 1px solid rgba(15, 44, 77, 0.25); /* light navy */
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+
+  border-color: #2a3d5a;
+
+  box-shadow:
+    0 6px 16px rgba(0, 64, 128, 0.2),   /* depth */
+    0 0 12px rgba(59, 108, 161, 0.25);  /* soft glow */
+}
+
+.stat-label {
+  font-size: 18px;   /* was too big/uneven before */
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.stat-value {
+  font-size: 28px;   /* 🔥 main focus */
+  font-weight: 700;
+}
+
+.stat-unit {
+  font-size: 14px;
+  color: #3b6ca1;
+}
+.stats-grid,
+.stat-card,
+.stat-label,
+.stat-value,
+.stat-unit {
+  font-family: 'Inter', sans-serif !important;
+}
+/* RIGHT PANEL */
+.dashboard-right {
+  flex: 1.5;
+  max-height: 670px;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* HEALTH QUOTE OVERLAY */
+.health-quote {
+  text-align: center;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 80%;
+  background: transparent; /* Soft light blue overlay */
+  box-shadow: 0 2px 8px rgba(0, 64, 128, 0.15);
+  font-family: 'Playfair Display', serif;
+}
+
+.health-quote h2 {
+  font-size: 24px;
+  color: #f5f7f9!important;
+   text-shadow: none !important;
+  filter: none !important;
+  box-shadow: none !important;
+  margin-bottom: 8px;
+  font-family: 'Playfair Display', serif;
+}
+
+.health-quote p {
+  font-size: 14px;
+  color: #f8f9fa !important;
+  font-family: 'Playfair Display', serif;
+}
+
+/* INPUTS */
+.report-content input,
+.report-content select,
+.report-content textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #cce0f2;
+  background: #f3f9ff;
+  color: #0f2c4d;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.report-content input:focus,
+.report-content select:focus,
+.report-content textarea:focus {
+  outline: none;
+  border-color: #3b6ca1;
+  box-shadow: 0 0 6px rgba(59, 108, 161, 0.3);
+}
+
+/* BUTTONS */
+button[type="submit"],
+.chat-btn {
+  background: #3b6ca1;
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button[type="submit"]:hover,
+.chat-btn:hover {
+  background: #2a4d78;
+  box-shadow: 0 0 8px rgba(59, 108, 161, 0.3);
+}
+
+/* CHART SECTION */
+.chart-section {
+  margin-top: 20px;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.chart-title {
+  color: #0f2c4d;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* INTERACTIVE QUOTE */
+.interactive-quote {
+  width: 100%;
+  margin-top: 100px;
+  margin-left:170px;
+  padding: 20px;
+  border-radius: 12px;
+  background: #d0e4f7;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 64, 128, 0.15);
+}
+
+.interactive-quote p {
+  color: #0f2c4d;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .dashboard-container {
+    flex-direction: column;
+  }
+
+  .dashboard-right {
+    width: 100%;
+    max-height: 500px;
+    padding: 20px;
+  }
+
+  .interactive-quote {
+    width: 100%;
+  }
+}
+
+@media (max-width: 500px) {
+  .page-title {
+    font-size: 22px;
+  }
+
+  .stat-value {
+    font-size: 16px;
+  }
+
+  .health-quote h2 {
+    font-size: 20px;
+  }
+
+  .health-quote p {
+    font-size: 12px;
+  }
+}
+/* 🔥 FORCE sans-serif in stat cards */
+.stat-card * {
+  font-family: 'Inter', sans-serif !important;
+}

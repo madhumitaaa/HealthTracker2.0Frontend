@@ -13,12 +13,21 @@ import AddEntry from './pages/AddEntry';
 import History from './pages/History';
 import WeeklyReport from './pages/WeeklyReport';
 import AIChat from './pages/AIChat';
+import DailyRoutine from "./pages/Routine";
+import NightReview from "./pages/NightReview";
+
+// Landing page
+import LandingPage from './pages/LandingPage';
 
 function App() {
   return (
     <Router>
       <AuthProvider>
         <Routes>
+
+          {/* Landing Page */}
+          <Route path="/" element={<LandingPage />} />
+
           {/* Public Routes */}
           <Route
             path="/login"
@@ -59,21 +68,21 @@ function App() {
             }
           />
           <Route
-            path="/history"
+            path="/add-entry/:entryId"
             element={
               <PrivateRoute>
                 <AppLayout>
-                  <History />
+                  <AddEntry />
                 </AppLayout>
               </PrivateRoute>
             }
           />
           <Route
-            path="/weekly-report"
+            path="/history"
             element={
               <PrivateRoute>
                 <AppLayout>
-                  <WeeklyReport />
+                  <History />
                 </AppLayout>
               </PrivateRoute>
             }
@@ -88,10 +97,40 @@ function App() {
               </PrivateRoute>
             }
           />
+          <Route
+            path="/daily-routine"
+            element={
+              <PrivateRoute>
+                <AppLayout>
+                  <DailyRoutine />
+                </AppLayout>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/night-review"
+            element={
+              <PrivateRoute>
+                <AppLayout>
+                  <NightReview />
+                </AppLayout>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/weekly-report"
+            element={
+              <PrivateRoute>
+                <AppLayout>
+                  <WeeklyReport />
+                </AppLayout>
+              </PrivateRoute>
+            }
+          />
 
-          {/* Default route */}
-          <Route path="/" element={<Navigate to="/login" replace />} />
-          <Route path="*" element={<Navigate to="/login" replace />} />
+          {/* Fallback */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+
         </Routes>
       </AuthProvider>
     </Router>

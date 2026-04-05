@@ -1,0 +1,75 @@
+.night-review-container {
+  padding: 24px;
+  background: #0f172a;
+  color: #fff;
+  min-height: 100vh;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* GRID */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 6 cards in a single row */
+  gap: 12px; /* small gap between cards */
+  justify-items: center; /* center cards in each column */
+}
+
+/* CARD */
+.card {
+  background: #2f4f2f !important; /* dark olive green */
+  padding: 12px; /* smaller padding */
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
+  transition: 0.3s;
+  height: 100px; /* fixed height */
+  width: 130px; /* fixed width for uniformity */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card h3 {
+  font-size: 13px;
+  color: #d9f99d; /* light green */
+  margin-bottom: 4px;
+}
+
+.card p {
+  font-size: 16px;
+  font-weight: bold;
+  color: #f0fdf4; /* off-white */
+}
+
+/* Highlight Cards (Completion / Score) */
+.highlight {
+  background: linear-gradient(135deg, #3b5323, #6b8e23); /* olive gradient */
+}
+
+/* AI CARD */
+.ai-card {
+  margin-top: 24px;
+  padding: 20px;
+  background: #111827;
+  border-radius: 16px;
+  box-shadow: 0 0 15px rgba(34,197,94,0.2);
+}
+
+/* CHARTS */
+.charts {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.chart-card {
+  background: #1e293b;
+  padding: 16px;
+  border-radius: 16px;
+}

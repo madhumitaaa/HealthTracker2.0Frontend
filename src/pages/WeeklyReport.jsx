@@ -3,7 +3,7 @@ import { aiAPI } from '../api/ai.api';
 import Button from '../components/common/Button';
 import Loader from '../components/common/Loader';
 import ErrorBanner from '../components/common/ErrorBanner';
-
+import '../styles/WeeklyReport.css';
 export default function WeeklyReport() {
   const [report, setReport] = useState('');
   const [loading, setLoading] = useState(false);
@@ -12,22 +12,15 @@ export default function WeeklyReport() {
   const handleGenerateReport = async () => {
     setError('');
     setLoading(true);
-
     try {
       const response = await aiAPI.generateWeeklyReport();
-      setReport(response.data.report);
+      setReport(response.report || response.data?.report);
     } catch (err) {
-      // Demo mode: generate a sample report
-      const errorMessage = err.response?.data?.message || err.message || 'Failed to generate report';
-      
+      const demoReport = `Weekly Health Report (Demo)...`; // keep your full demo text
       if (err.response?.status === 429) {
-        setError('Rate limit reached. Please try again later.');
-      } else if (err.message?.includes('ERR_NETWORK') || err.message?.includes('Failed to fetch') || err.code === 'ERR_NETWORK') {
-        // Backend not running, demo mode
-        const demoReport = `Weekly Health Report\n\n✅ Summary\nGreat week overall! You maintained a consistent sleep schedule and exceeded your daily step goals.\n\n📊 Key Metrics\n- Average Calories: 2,150 kcal\n- Average Sleep: 7.2 hours\n- Total Steps: 58,000 steps\n- Average Heart Rate: 70 bpm\n\n💪 Highlights\n- Great cardiovascular performance\n- Excellent sleep consistency\n- High activity levels\n\n🎯 Recommendations\n- Maintain current exercise routine\n- Keep hydration levels consistent\n- Continue healthy eating patterns`;
-        setReport(demoReport);
+        setError('Rate limit reached. Try again later.');
       } else {
-        setError(errorMessage);
+        setReport(demoReport);
       }
     } finally {
       setLoading(false);
@@ -44,9 +37,9 @@ export default function WeeklyReport() {
       <div className="report-container">
         {report ? (
           <div className="report-content">
-            <div className="report-text">
-              {report}
-            </div>
+            <div className="report-text" style={{ color: '#fff', whiteSpace: 'pre-wrap' }}>
+  {report}
+</div>
             <Button onClick={() => setReport('')} variant="secondary" fullWidth>
               Clear Report
             </Button>
@@ -54,11 +47,7 @@ export default function WeeklyReport() {
         ) : (
           <div className="empty-state">
             <p>Generate your weekly health report to get AI-powered insights</p>
-            <Button
-              onClick={handleGenerateReport}
-              loading={loading}
-              fullWidth
-            >
+            <Button onClick={handleGenerateReport} loading={loading} fullWidth>
               📊 Generate Weekly Report
             </Button>
           </div>

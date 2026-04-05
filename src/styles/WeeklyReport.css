@@ -1,0 +1,82 @@
+/* =========================
+   WEEKLY REPORT PAGE STYLING
+========================= */
+.page-container {
+  padding: 24px;
+  min-height: 100vh;
+  background: #0f172a; /* dark background */
+  color: #fff;          /* pure white text */
+  font-family: 'Inter', 'Segoe UI', 'Helvetica', sans-serif; /* clean sans-serif */
+}
+
+.page-container h1 {
+  font-size: 34px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #fff; /* white heading */
+}
+
+.page-subtitle {
+  font-size: 22px;
+  color: #cbd5e1; /* soft gray for subtitle */
+  margin-bottom: 24px;
+}
+
+/* REPORT CONTAINER */
+.report-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.report-content {
+  background: #1f2a20; /* dark olive green card */
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  line-height: 1.6;
+  white-space: pre-wrap; /* respect AI line breaks */
+  color: #fff !important; /* text white */
+}
+
+.report-text {
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+.report-text h2, 
+.report-text h3, 
+.report-text h4 {
+  color: #f0fdf4; /* soft white for headings */
+  margin: 12px 0 6px;
+}
+
+.report-text ul {
+  padding-left: 20px;
+  margin-bottom: 12px;
+}
+
+.report-text li {
+  margin-bottom: 6px;
+}
+
+/* BUTTONS */
+button, .btn {
+  font-weight: 500;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-family: 'Inter', 'Segoe UI', 'Helvetica', sans-serif;
+}
+
+/* EMPTY STATE */
+.empty-state {
+  background: #111827;
+  padding: 24px;
+  border-radius: 16px;
+  text-align: center;
+  color: #cbd5e1; /* soft gray */
+  font-size: 16px;
+  font-family: 'Inter', 'Segoe UI', 'Helvetica', sans-serif;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+}

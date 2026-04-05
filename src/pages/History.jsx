@@ -5,7 +5,7 @@ import { entriesAPI } from '../api/entries.api';
 import Button from '../components/common/Button';
 import Loader from '../components/common/Loader';
 import ErrorBanner from '../components/common/ErrorBanner';
-
+import '../styles/history.css';
 
 export default function History() {
   const [entries, setEntries] = useState([]);
@@ -22,11 +22,11 @@ export default function History() {
         const res = await entriesAPI.getAll();
 
         // ✅ FIX: backend wraps response
-        setEntries(res.data.data || []);
+        setEntries(res.data || []);
 
       } catch (err) {
 
-        setError(err.response?.data?.message || 'Failed to fetch entries');
+        setError(err.message || 'Failed to fetch entries');
 
       } finally {
 
@@ -50,7 +50,7 @@ export default function History() {
 
     } catch (err) {
 
-      setError(err.response?.data?.message || 'Failed to delete entry');
+     setError(err.message || 'Failed to delete entry');
 
     }
   };

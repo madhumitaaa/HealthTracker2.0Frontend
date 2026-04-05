@@ -128,9 +128,9 @@ const handleSendMessage = async (e) => {
     const response = await aiAPI.chat(userMessage);
 
     const aiReply =
-      response?.data?.message ||
-      response?.data?.reply ||
-      "⚠️ AI returned an empty response.";
+  response?.message ||
+  response?.reply ||
+  "Sorry, I couldn't generate a response.";
 
     setMessages(prev => [
       ...prev,

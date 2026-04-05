@@ -1,0 +1,145 @@
+.landing-page {
+  font-family: 'Inter', sans-serif;
+  background: #064e3b; /* dark green theme */
+  color: #e0fdf4; /* light green text */
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* HERO */
+.hero {
+  display: flex;
+  padding: 80px;
+  align-items: center;
+  gap: 50px;
+}
+.hero-subtitle {
+  color: white;
+  text-shadow: 0 0 5px #ffffffaa;
+}
+.hero-left h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+.hero-left p {
+  font-size: 1.3rem;
+  margin-bottom: 30px;
+}
+.hero-buttons a {
+  margin-right: 15px;
+  text-decoration: none;
+}
+.hero-right img {
+  width: 100%;
+  border-radius: 20px;
+}
+
+/* BUTTONS */
+.primary-btn {
+  background: #10b981;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+.secondary-btn {
+  border: 2px solid #10b981;
+  color: #10b981;
+  padding: 12px 24px;
+  border-radius: 10px;
+}
+
+/* BENEFITS CAROUSEL */
+.benefits {
+  padding: 80px 20px;
+  text-align: center;
+}
+.benefit-carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 30px;
+  padding: 20px 0;
+}
+.benefit-item {
+  flex: 0 0 auto;
+  width: 600px;
+}
+.benefit-item img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+.quote {
+  margin-top: 15px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #eef8f3;
+}
+
+/* FEATURES CAROUSEL */
+.features {
+  padding: 80px 20px;
+}
+.feature-carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 25px;
+  padding: 20px 0;
+}
+.feature-card {
+  flex: 0 0 auto;
+  width: 300px;
+  background: #065f46;
+  border-radius: 15px;
+  padding: 15px;
+  text-align: center;
+}
+.feature-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+.feature-card p {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #e0fdf4;
+}
+
+/* CTA */
+.cta {
+  text-align: center;
+  padding: 80px 20px;
+}
+.cta h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+/* SCROLLBAR STYLING */
+.benefit-carousel::-webkit-scrollbar,
+.feature-carousel::-webkit-scrollbar {
+  height: 10px;
+}
+.benefit-carousel::-webkit-scrollbar-thumb,
+.feature-carousel::-webkit-scrollbar-thumb {
+  background: #10b981;
+  border-radius: 10px;
+}
+.benefit-carousel::-webkit-scrollbar-track,
+.feature-carousel::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.1);
+}
+/* FEATURE CARD HOVER GLOW */
+.feature-card {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.feature-card:hover {
+  box-shadow: 0 0 20px 5px rgba(16, 185, 129, 0.6); /* green glow */
+  transform: translateY(-5px);
+}

@@ -9,6 +9,48 @@
 @import url('./styles/Pages.css');
 @import url('./styles/Chat.css');
 
+/* ===== GLOBAL RESET ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;   /* ✅ THIS is your scroll */
+
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Media safety */
+img, video {
+  max-width: 100%;
+  display: block;
+}
+
+/* Smooth page animation */
+.page-container {
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 :root {
 
   /* Primary Brand Colors */
@@ -89,7 +131,7 @@ body {
 }
 
 #root {
-  height: 100%;
+ min-height: 100vh;
 }
 
 /* Typography */

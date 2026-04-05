@@ -1,14 +1,17 @@
-
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { entriesAPI } from '../api/entries.api';
 import Button from '../components/common/Button';
 import ErrorBanner from '../components/common/ErrorBanner';
+import '../styles/AddEntry.css';
+import { useAuth } from '../context/AuthContext';
 
 export default function AddEntry() {
-
   const { entryId } = useParams();
   const navigate = useNavigate();
+
+  // ✅ FIX: properly extract accessToken
+  const { accessToken } = useAuth();
 
   const [formData, setFormData] = useState({
     date: new Date().toISOString().split('T')[0],
@@ -33,20 +36,18 @@ export default function AddEntry() {
     'Cough'
   ];
 
+  // ✅ FETCH ENTRY (EDIT MODE)
   useEffect(() => {
-
-    if (!entryId) return;
+    if (!entryId || !accessToken) return;
 
     const fetchEntry = async () => {
-
       try {
-
         setLoading(true);
 
         const res = await entriesAPI.getById(entryId);
 
-        // ✅ FIX
-        const entry = res.data.data;
+        // ✅ IMPORTANT: API already returns data directly
+        const entry = res.data;
 
         setFormData({
           date: new Date(entry.date).toISOString().split('T')[0],
@@ -61,22 +62,16 @@ export default function AddEntry() {
         });
 
       } catch (err) {
-
-        setError(err.response?.data?.message || 'Failed to fetch entry');
-
+        setError(err?.message || 'Failed to fetch entry');
       } finally {
-
         setLoading(false);
-
       }
     };
 
     fetchEntry();
-
-  }, [entryId]);
+  }, [entryId, accessToken]);
 
   const handleChange = (e) => {
-
     const { name, value } = e.target;
 
     setFormData(prev => ({
@@ -86,7 +81,6 @@ export default function AddEntry() {
   };
 
   const handleSymptomToggle = (symptom) => {
-
     setFormData(prev => ({
       ...prev,
       symptoms: prev.symptoms.includes(symptom)
@@ -95,20 +89,28 @@ export default function AddEntry() {
     }));
   };
 
+  // ✅ SUBMIT
+ 
   const handleSubmit = async (e) => {
-
     e.preventDefault();
 
     setError('');
     setLoading(true);
-
+const selectedDate = new Date(formData.date);
+selectedDate.setHours(0, 0, 0, 0);
     const payload = {
       ...formData,
-      date: new Date(formData.date).toISOString()
+      date: selectedDate.toISOString(),
+
+      // ✅ convert safely
+      calories: formData.calories === '' ? 0 : Number(formData.calories),
+      sleep: formData.sleep === '' ? 0 : Number(formData.sleep),
+      steps: formData.steps === '' ? 0 : Number(formData.steps),
+      heartRate: formData.heartRate === '' ? 0 : Number(formData.heartRate),
+      waterIntake: formData.waterIntake === '' ? 0 : Number(formData.waterIntake),
     };
 
     try {
-
       if (entryId) {
         await entriesAPI.update(entryId, payload);
       } else {
@@ -118,24 +120,19 @@ export default function AddEntry() {
       navigate('/history');
 
     } catch (err) {
-
-      setError(err.response?.data?.message || 'Failed to save entry');
-
+      setError(err?.message || 'Failed to save entry');
     } finally {
-
       setLoading(false);
-
     }
   };
 
+  // ✅ DELETE
   const handleDelete = async () => {
-
     if (!entryId) return;
 
     if (!window.confirm('Are you sure you want to delete this entry?')) return;
 
     try {
-
       setLoading(true);
 
       await entriesAPI.delete(entryId);
@@ -143,13 +140,9 @@ export default function AddEntry() {
       navigate('/history');
 
     } catch (err) {
-
-      setError(err.response?.data?.message || 'Failed to delete entry');
-
+      setError(err?.message || 'Failed to delete entry');
     } finally {
-
       setLoading(false);
-
     }
   };
 
@@ -164,7 +157,6 @@ export default function AddEntry() {
       <form onSubmit={handleSubmit} className="form-layout">
 
         <div className="form-section">
-
           <h3>📅 Date & Stats</h3>
 
           <div className="form-group">
@@ -179,7 +171,6 @@ export default function AddEntry() {
           </div>
 
           <div className="form-row">
-
             <div className="form-group">
               <label>Calories</label>
               <input
@@ -202,11 +193,9 @@ export default function AddEntry() {
                 disabled={loading}
               />
             </div>
-
           </div>
 
           <div className="form-row">
-
             <div className="form-group">
               <label>Steps</label>
               <input
@@ -228,18 +217,14 @@ export default function AddEntry() {
                 disabled={loading}
               />
             </div>
-
           </div>
-
         </div>
 
         <div className="form-section">
-
           <h3>😊 Mood & Hydration</h3>
 
           <div className="form-group">
             <label>Mood</label>
-
             <select
               name="mood"
               value={formData.mood}
@@ -251,7 +236,6 @@ export default function AddEntry() {
               <option value="good">Good</option>
               <option value="excellent">Excellent</option>
             </select>
-
           </div>
 
           <div className="form-group">
@@ -264,17 +248,13 @@ export default function AddEntry() {
               disabled={loading}
             />
           </div>
-
         </div>
 
         <div className="form-section">
-
           <h3>🏥 Symptoms</h3>
 
           <div className="chips-group">
-
             {symptomsList.map(s => (
-
               <button
                 key={s}
                 type="button"
@@ -284,15 +264,11 @@ export default function AddEntry() {
               >
                 {s}
               </button>
-
             ))}
-
           </div>
-
         </div>
 
         <div className="form-section">
-
           <h3>📝 Notes</h3>
 
           <textarea
@@ -303,11 +279,9 @@ export default function AddEntry() {
             placeholder="Additional notes..."
             disabled={loading}
           />
-
         </div>
 
         <div className="form-actions">
-
           <Button
             type="button"
             variant="secondary"
@@ -331,11 +305,9 @@ export default function AddEntry() {
           <Button type="submit" loading={loading}>
             {entryId ? 'Update Entry' : 'Save Entry'}
           </Button>
-
         </div>
 
       </form>
-
     </div>
   );
 }

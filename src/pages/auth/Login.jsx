@@ -27,29 +27,42 @@ export default function Login() {
     try {
       const response = await authAPI.login({ email, password });
 
-      // Backend returns: token, accessToken, refreshToken, userId
-      const { token, accessToken, refreshToken, userId } = response.data;
+      // ✅ FIX: response already contains parsed data (NO .data)
+      const { accessToken, refreshToken, user } = response;
 
-      // Construct a user object for frontend context
-      const user = {
-        id: userId,
-        email,
-        name: email.split('@')[0] // simple placeholder name
-      };
+      // Optional: store tokens if needed
+      if (accessToken) {
+        localStorage.setItem('accessToken', accessToken);
+      }
+      if (refreshToken) {
+        localStorage.setItem('refreshToken', refreshToken);
+      }
 
-      login(user, token || accessToken); // pass token to context
+      // ✅ Use user directly (already prepared in API layer)
+
+login(user, accessToken, refreshToken);
+
       navigate('/dashboard');
     } catch (err) {
-      const errorMessage = err.response?.data?.message || err.message || 'Login failed. Please try again.';
+      const errorMessage =
+        err.response?.data?.message ||
+        err.message ||
+        'Login failed. Please try again.';
 
       // Demo fallback if backend is unreachable
-      if (err.message?.includes('ERR_NETWORK') || err.message?.includes('Failed to fetch') || err.code === 'ERR_NETWORK') {
+      if (
+        err.message?.includes('ERR_NETWORK') ||
+        err.message?.includes('Failed to fetch') ||
+        err.code === 'ERR_NETWORK'
+      ) {
         const demoUser = {
           id: '1',
           email,
-          name: email.split('@')[0]
+          name: email.split('@')[0],
         };
-        const demoToken = 'demo-token-' + Math.random().toString(36).substring(2, 11);
+        const demoToken =
+          'demo-token-' + Math.random().toString(36).substring(2, 11);
+
         login(demoUser, demoToken);
         navigate('/dashboard');
       } else {
